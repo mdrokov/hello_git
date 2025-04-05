@@ -355,13 +355,661 @@ display: none;
 </div>
 
 
+<pre class="r"><code>top &lt;- read_csv(&quot;imdb.csv&quot;)</code></pre>
+<pre><code>## Rows: 4500 Columns: 8
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (4): title, genres, director, cast
+## dbl (4): year, minutes, rating, votes
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>head(top)</code></pre>
+<pre><code>## # A tibble: 6 × 8
+##   title                         year minutes genres rating  votes director cast 
+##   &lt;chr&gt;                        &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;
+## 1 Star Wars: Episode V - The …  1980     124 Actio…    8.7 1.43e6 Irvin K… Mark…
+## 2 The Shining                   1980     146 Drama…    8.4 1.16e6 Stanley… Jack…
+## 3 Raging Bull                   1980     129 Biogr…    8.1 3.94e5 Martin … Robe…
+## 4 Airplane!                     1980      88 Comedy    7.7 2.72e5 Jim Abr… Robe…
+## 5 The Elephant Man              1980     124 Biogr…    8.2 2.71e5 David L… Anth…
+## 6 The Blues Brothers            1980     133 Adven…    7.9 2.21e5 John La… John…</code></pre>
+<pre class="r"><code>modern &lt;- top |&gt;
+  filter(year &gt;= 2000)
+head(modern)</code></pre>
+<pre><code>## # A tibble: 6 × 8
+##   title                year minutes genres          rating  votes director cast 
+##   &lt;chr&gt;               &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;
+## 1 Gladiator            2000     155 Action,Adventu…    8.5 1.75e6 Ridley … Russ…
+## 2 Memento              2000     113 Mystery,Thrill…    8.4 1.37e6 Christo… Guy …
+## 3 Snatch               2000     102 Comedy,Crime       8.2 9.42e5 Guy Rit… Jaso…
+## 4 Requiem for a Dream  2000     102 Drama              8.3 9.34e5 Darren … Elle…
+## 5 American Psycho      2000     102 Crime,Drama,Ho…    7.6 7.73e5 Mary Ha… Chri…
+## 6 X-Men                2000     104 Action,Adventu…    7.3 6.71e5 Bryan S… Patr…</code></pre>
 <pre class="r"><code>set.seed(157)
 xs &lt;- sample(1:250, 25)
 xs</code></pre>
 <pre><code>##  [1]  61 130 120 164 128 175 121 230 114 179  63 127 115 224 195 229  92  51  74
 ## [20] 231 238  46  25  30 215</code></pre>
-<pre class="r"><code>median(xs)</code></pre>
-<pre><code>## [1] 127</code></pre>
+<pre class="r"><code>me &lt;- median(xs)</code></pre>
+<p>Median is 127.</p>
+<pre class="r"><code>modern[xs,] |&gt;
+  gt::gt()</code></pre>
+<div id="jzzdcijxpj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jzzdcijxpj table {
+font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+#jzzdcijxpj thead, #jzzdcijxpj tbody, #jzzdcijxpj tfoot, #jzzdcijxpj tr, #jzzdcijxpj td, #jzzdcijxpj th {
+border-style: none;
+}
+#jzzdcijxpj p {
+margin: 0;
+padding: 0;
+}
+#jzzdcijxpj .gt_table {
+display: table;
+border-collapse: collapse;
+line-height: normal;
+margin-left: auto;
+margin-right: auto;
+color: #333333;
+font-size: 16px;
+font-weight: normal;
+font-style: normal;
+background-color: #FFFFFF;
+width: auto;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #A8A8A8;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #A8A8A8;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+}
+#jzzdcijxpj .gt_caption {
+padding-top: 4px;
+padding-bottom: 4px;
+}
+#jzzdcijxpj .gt_title {
+color: #333333;
+font-size: 125%;
+font-weight: initial;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-color: #FFFFFF;
+border-bottom-width: 0;
+}
+#jzzdcijxpj .gt_subtitle {
+color: #333333;
+font-size: 85%;
+font-weight: initial;
+padding-top: 3px;
+padding-bottom: 5px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-color: #FFFFFF;
+border-top-width: 0;
+}
+#jzzdcijxpj .gt_heading {
+background-color: #FFFFFF;
+text-align: center;
+border-bottom-color: #FFFFFF;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#jzzdcijxpj .gt_bottom_border {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#jzzdcijxpj .gt_col_headings {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#jzzdcijxpj .gt_col_heading {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
+overflow-x: hidden;
+}
+#jzzdcijxpj .gt_column_spanner_outer {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+padding-top: 0;
+padding-bottom: 0;
+padding-left: 4px;
+padding-right: 4px;
+}
+#jzzdcijxpj .gt_column_spanner_outer:first-child {
+padding-left: 0;
+}
+#jzzdcijxpj .gt_column_spanner_outer:last-child {
+padding-right: 0;
+}
+#jzzdcijxpj .gt_column_spanner {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 5px;
+overflow-x: hidden;
+display: inline-block;
+width: 100%;
+}
+#jzzdcijxpj .gt_spanner_row {
+border-bottom-style: hidden;
+}
+#jzzdcijxpj .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+text-align: left;
+}
+#jzzdcijxpj .gt_empty_group_heading {
+padding: 0.5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: middle;
+}
+#jzzdcijxpj .gt_from_md > :first-child {
+margin-top: 0;
+}
+#jzzdcijxpj .gt_from_md > :last-child {
+margin-bottom: 0;
+}
+#jzzdcijxpj .gt_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+margin: 10px;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+overflow-x: hidden;
+}
+#jzzdcijxpj .gt_stub {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+}
+#jzzdcijxpj .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#jzzdcijxpj .gt_row_group_first td {
+border-top-width: 2px;
+}
+#jzzdcijxpj .gt_row_group_first th {
+border-top-width: 2px;
+}
+#jzzdcijxpj .gt_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#jzzdcijxpj .gt_first_summary_row {
+border-top-style: solid;
+border-top-color: #D3D3D3;
+}
+#jzzdcijxpj .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#jzzdcijxpj .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#jzzdcijxpj .gt_grand_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#jzzdcijxpj .gt_first_grand_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-style: double;
+border-top-width: 6px;
+border-top-color: #D3D3D3;
+}
+#jzzdcijxpj .gt_last_grand_summary_row_top {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: double;
+border-bottom-width: 6px;
+border-bottom-color: #D3D3D3;
+}
+#jzzdcijxpj .gt_striped {
+background-color: rgba(128, 128, 128, 0.05);
+}
+#jzzdcijxpj .gt_table_body {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#jzzdcijxpj .gt_footnotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#jzzdcijxpj .gt_footnote {
+margin: 0px;
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#jzzdcijxpj .gt_sourcenotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#jzzdcijxpj .gt_sourcenote {
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#jzzdcijxpj .gt_left {
+text-align: left;
+}
+#jzzdcijxpj .gt_center {
+text-align: center;
+}
+#jzzdcijxpj .gt_right {
+text-align: right;
+font-variant-numeric: tabular-nums;
+}
+#jzzdcijxpj .gt_font_normal {
+font-weight: normal;
+}
+#jzzdcijxpj .gt_font_bold {
+font-weight: bold;
+}
+#jzzdcijxpj .gt_font_italic {
+font-style: italic;
+}
+#jzzdcijxpj .gt_super {
+font-size: 65%;
+}
+#jzzdcijxpj .gt_footnote_marks {
+font-size: 75%;
+vertical-align: 0.4em;
+position: initial;
+}
+#jzzdcijxpj .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#jzzdcijxpj .gt_indent_1 {
+text-indent: 5px;
+}
+#jzzdcijxpj .gt_indent_2 {
+text-indent: 10px;
+}
+#jzzdcijxpj .gt_indent_3 {
+text-indent: 15px;
+}
+#jzzdcijxpj .gt_indent_4 {
+text-indent: 20px;
+}
+#jzzdcijxpj .gt_indent_5 {
+text-indent: 25px;
+}
+#jzzdcijxpj .katex-display {
+display: inline-flex !important;
+margin-bottom: 0.75em !important;
+}
+#jzzdcijxpj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="title">title</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="year">year</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="minutes">minutes</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="genres">genres</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="rating">rating</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="votes">votes</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="director">director</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="cast">cast</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="title" class="gt_row gt_left">Battlefield Earth</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="minutes" class="gt_row gt_right">117</td>
+<td headers="genres" class="gt_row gt_left">Action,Adventure,Sci-Fi</td>
+<td headers="rating" class="gt_row gt_right">2.5</td>
+<td headers="votes" class="gt_row gt_right">84444</td>
+<td headers="director" class="gt_row gt_left">Roger Christian</td>
+<td headers="cast" class="gt_row gt_left">John Travolta,Forest Whitaker,Barry Pepper,Kim Coates,Sabine Karsenti</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Planet of the Apes</td>
+<td headers="year" class="gt_row gt_right">2001</td>
+<td headers="minutes" class="gt_row gt_right">120</td>
+<td headers="genres" class="gt_row gt_left">Action,Adventure,Sci-Fi</td>
+<td headers="rating" class="gt_row gt_right">5.7</td>
+<td headers="votes" class="gt_row gt_right">237577</td>
+<td headers="director" class="gt_row gt_left">Tim Burton</td>
+<td headers="cast" class="gt_row gt_left">Mark Wahlberg,Helena Bonham Carter,Tim Roth,Michael Clarke Duncan,Paul Giamatti</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Moulin Rouge!</td>
+<td headers="year" class="gt_row gt_right">2001</td>
+<td headers="minutes" class="gt_row gt_right">127</td>
+<td headers="genres" class="gt_row gt_left">Drama,Musical,Romance</td>
+<td headers="rating" class="gt_row gt_right">7.6</td>
+<td headers="votes" class="gt_row gt_right">306471</td>
+<td headers="director" class="gt_row gt_left">Baz Luhrmann</td>
+<td headers="cast" class="gt_row gt_left">Nicole Kidman,Ewan McGregor,John Leguizamo,Jim Broadbent,Richard Roxburgh</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Monster&#39;s Ball</td>
+<td headers="year" class="gt_row gt_right">2001</td>
+<td headers="minutes" class="gt_row gt_right">111</td>
+<td headers="genres" class="gt_row gt_left">Drama,Romance</td>
+<td headers="rating" class="gt_row gt_right">7.0</td>
+<td headers="votes" class="gt_row gt_right">96155</td>
+<td headers="director" class="gt_row gt_left">Marc Forster</td>
+<td headers="cast" class="gt_row gt_left">Billy Bob Thornton,Halle Berry,Taylor Simpson,Gabrielle Witcher,Heath Ledger</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Legally Blonde</td>
+<td headers="year" class="gt_row gt_right">2001</td>
+<td headers="minutes" class="gt_row gt_right">96</td>
+<td headers="genres" class="gt_row gt_left">Comedy,Romance</td>
+<td headers="rating" class="gt_row gt_right">6.5</td>
+<td headers="votes" class="gt_row gt_right">264473</td>
+<td headers="director" class="gt_row gt_left">Robert Luketic</td>
+<td headers="cast" class="gt_row gt_left">Reese Witherspoon,Luke Wilson,Selma Blair,Matthew Davis,Victor Garber</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">The Devil&#39;s Backbone</td>
+<td headers="year" class="gt_row gt_right">2001</td>
+<td headers="minutes" class="gt_row gt_right">106</td>
+<td headers="genres" class="gt_row gt_left">Drama,Horror,Thriller</td>
+<td headers="rating" class="gt_row gt_right">7.4</td>
+<td headers="votes" class="gt_row gt_right">72943</td>
+<td headers="director" class="gt_row gt_left">Guillermo del Toro</td>
+<td headers="cast" class="gt_row gt_left">Marisa Paredes,Eduardo Noriega,Federico Luppi,Fernando Tielve,Íñigo Garcés</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Zoolander</td>
+<td headers="year" class="gt_row gt_right">2001</td>
+<td headers="minutes" class="gt_row gt_right">90</td>
+<td headers="genres" class="gt_row gt_left">Comedy</td>
+<td headers="rating" class="gt_row gt_right">6.5</td>
+<td headers="votes" class="gt_row gt_right">304658</td>
+<td headers="director" class="gt_row gt_left">Ben Stiller</td>
+<td headers="cast" class="gt_row gt_left">Ben Stiller,Owen Wilson,Christine Taylor,Will Ferrell,Milla Jovovich</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Lilo &amp; Stitch</td>
+<td headers="year" class="gt_row gt_right">2002</td>
+<td headers="minutes" class="gt_row gt_right">85</td>
+<td headers="genres" class="gt_row gt_left">Adventure,Animation,Comedy</td>
+<td headers="rating" class="gt_row gt_right">7.3</td>
+<td headers="votes" class="gt_row gt_right">223311</td>
+<td headers="director" class="gt_row gt_left">Dean DeBlois</td>
+<td headers="cast" class="gt_row gt_left">Daveigh Chase,Chris Sanders,Tia Carrere,David Ogden Stiers,Kevin McDonald</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Mulholland Drive</td>
+<td headers="year" class="gt_row gt_right">2001</td>
+<td headers="minutes" class="gt_row gt_right">147</td>
+<td headers="genres" class="gt_row gt_left">Drama,Mystery,Thriller</td>
+<td headers="rating" class="gt_row gt_right">7.9</td>
+<td headers="votes" class="gt_row gt_right">404649</td>
+<td headers="director" class="gt_row gt_left">David Lynch</td>
+<td headers="cast" class="gt_row gt_left">Naomi Watts,Naomi Watts,Laura Harring,Laura Harring,Justin Theroux</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Kiss of the Dragon</td>
+<td headers="year" class="gt_row gt_right">2001</td>
+<td headers="minutes" class="gt_row gt_right">98</td>
+<td headers="genres" class="gt_row gt_left">Action,Crime,Thriller</td>
+<td headers="rating" class="gt_row gt_right">6.6</td>
+<td headers="votes" class="gt_row gt_right">67995</td>
+<td headers="director" class="gt_row gt_left">Chris Nahon</td>
+<td headers="cast" class="gt_row gt_left">Jet Li,Bridget Fonda,Tchéky Karyo,Ric Young,Burt Kwouk</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Mission to Mars</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="minutes" class="gt_row gt_right">114</td>
+<td headers="genres" class="gt_row gt_left">Adventure,Sci-Fi,Thriller</td>
+<td headers="rating" class="gt_row gt_right">5.7</td>
+<td headers="votes" class="gt_row gt_right">77831</td>
+<td headers="director" class="gt_row gt_left">Brian De Palma</td>
+<td headers="cast" class="gt_row gt_left">Tim Robbins,Gary Sinise,Don Cheadle,Connie Nielsen,Jerry O&#39;Connell</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Bridget Jones&#39;s Diary</td>
+<td headers="year" class="gt_row gt_right">2001</td>
+<td headers="minutes" class="gt_row gt_right">97</td>
+<td headers="genres" class="gt_row gt_left">Comedy,Drama,Romance</td>
+<td headers="rating" class="gt_row gt_right">6.8</td>
+<td headers="votes" class="gt_row gt_right">276921</td>
+<td headers="director" class="gt_row gt_left">Sharon Maguire</td>
+<td headers="cast" class="gt_row gt_left">Renée Zellweger,Colin Firth,Hugh Grant,Gemma Jones,Celia Imrie</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Pearl Harbor</td>
+<td headers="year" class="gt_row gt_right">2001</td>
+<td headers="minutes" class="gt_row gt_right">183</td>
+<td headers="genres" class="gt_row gt_left">Action,Drama,Romance</td>
+<td headers="rating" class="gt_row gt_right">6.2</td>
+<td headers="votes" class="gt_row gt_right">360290</td>
+<td headers="director" class="gt_row gt_left">Michael Bay</td>
+<td headers="cast" class="gt_row gt_left">Ben Affleck,Kate Beckinsale,Josh Hartnett,William Lee Scott,Greg Zola</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Road to Perdition</td>
+<td headers="year" class="gt_row gt_right">2002</td>
+<td headers="minutes" class="gt_row gt_right">117</td>
+<td headers="genres" class="gt_row gt_left">Crime,Drama,Thriller</td>
+<td headers="rating" class="gt_row gt_right">7.7</td>
+<td headers="votes" class="gt_row gt_right">292334</td>
+<td headers="director" class="gt_row gt_left">Sam Mendes</td>
+<td headers="cast" class="gt_row gt_left">Tom Hanks,Tyler Hoechlin,Paul Newman,Rob Maxey,Liam Aiken</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Don&#39;t Say a Word</td>
+<td headers="year" class="gt_row gt_right">2001</td>
+<td headers="minutes" class="gt_row gt_right">113</td>
+<td headers="genres" class="gt_row gt_left">Drama,Mystery,Thriller</td>
+<td headers="rating" class="gt_row gt_right">6.3</td>
+<td headers="votes" class="gt_row gt_right">58654</td>
+<td headers="director" class="gt_row gt_left">Gary Fleder</td>
+<td headers="cast" class="gt_row gt_left">Michael Douglas,Sean Bean,Brittany Murphy,Skye McCole Bartusiak,Famke Janssen</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">A Walk to Remember</td>
+<td headers="year" class="gt_row gt_right">2002</td>
+<td headers="minutes" class="gt_row gt_right">101</td>
+<td headers="genres" class="gt_row gt_left">Drama,Romance</td>
+<td headers="rating" class="gt_row gt_right">7.3</td>
+<td headers="votes" class="gt_row gt_right">226310</td>
+<td headers="director" class="gt_row gt_left">Adam Shankman</td>
+<td headers="cast" class="gt_row gt_left">Mandy Moore,Shane West,Peter Coyote,Daryl Hannah,Lauren German</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Reindeer Games</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="minutes" class="gt_row gt_right">104</td>
+<td headers="genres" class="gt_row gt_left">Action,Crime,Thriller</td>
+<td headers="rating" class="gt_row gt_right">5.8</td>
+<td headers="votes" class="gt_row gt_right">43454</td>
+<td headers="director" class="gt_row gt_left">John Frankenheimer</td>
+<td headers="cast" class="gt_row gt_left">Ben Affleck,Gary Sinise,Charlize Theron,James Frain,Dana Stubblefield</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Malena</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="minutes" class="gt_row gt_right">108</td>
+<td headers="genres" class="gt_row gt_left">Drama,Romance,War</td>
+<td headers="rating" class="gt_row gt_right">7.4</td>
+<td headers="votes" class="gt_row gt_right">118496</td>
+<td headers="director" class="gt_row gt_left">Giuseppe Tornatore</td>
+<td headers="cast" class="gt_row gt_left">Monica Bellucci,Giuseppe Sulfaro,Luciano Federico,Matilde Piana,Pietro Notarianni</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Titan A.E.</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="minutes" class="gt_row gt_right">94</td>
+<td headers="genres" class="gt_row gt_left">Action,Adventure,Animation</td>
+<td headers="rating" class="gt_row gt_right">6.6</td>
+<td headers="votes" class="gt_row gt_right">65194</td>
+<td headers="director" class="gt_row gt_left">Don Bluth</td>
+<td headers="cast" class="gt_row gt_left">Matt Damon,Drew Barrymore,Bill Pullman,Jim Breuer,Ken Hudson Campbell</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Adaptation.</td>
+<td headers="year" class="gt_row gt_right">2002</td>
+<td headers="minutes" class="gt_row gt_right">115</td>
+<td headers="genres" class="gt_row gt_left">Comedy,Drama</td>
+<td headers="rating" class="gt_row gt_right">7.7</td>
+<td headers="votes" class="gt_row gt_right">208256</td>
+<td headers="director" class="gt_row gt_left">Spike Jonze</td>
+<td headers="cast" class="gt_row gt_left">Nicolas Cage,Nicolas Cage,Meryl Streep,Chris Cooper,Tilda Swinton</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">We Were Soldiers</td>
+<td headers="year" class="gt_row gt_right">2002</td>
+<td headers="minutes" class="gt_row gt_right">138</td>
+<td headers="genres" class="gt_row gt_left">Action,Drama,History</td>
+<td headers="rating" class="gt_row gt_right">7.2</td>
+<td headers="votes" class="gt_row gt_right">155214</td>
+<td headers="director" class="gt_row gt_left">Randall Wallace</td>
+<td headers="cast" class="gt_row gt_left">Mel Gibson,Madeleine Stowe,Greg Kinnear,Sam Elliott,Chris Klein</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Pay It Forward</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="minutes" class="gt_row gt_right">123</td>
+<td headers="genres" class="gt_row gt_left">Drama</td>
+<td headers="rating" class="gt_row gt_right">7.2</td>
+<td headers="votes" class="gt_row gt_right">126109</td>
+<td headers="director" class="gt_row gt_left">Mimi Leder</td>
+<td headers="cast" class="gt_row gt_left">Kevin Spacey,Haley Joel Osment,Helen Hunt,Jay Mohr,Jim Caviezel</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">The Emperor&#39;s New Groove</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="minutes" class="gt_row gt_right">78</td>
+<td headers="genres" class="gt_row gt_left">Adventure,Animation,Comedy</td>
+<td headers="rating" class="gt_row gt_right">7.4</td>
+<td headers="votes" class="gt_row gt_right">236262</td>
+<td headers="director" class="gt_row gt_left">Mark Dindal</td>
+<td headers="cast" class="gt_row gt_left">David Spade,John Goodman,Eartha Kitt,Patrick Warburton,Wendie Malick</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">Chocolat</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="minutes" class="gt_row gt_right">121</td>
+<td headers="genres" class="gt_row gt_left">Drama,Romance</td>
+<td headers="rating" class="gt_row gt_right">7.2</td>
+<td headers="votes" class="gt_row gt_right">206228</td>
+<td headers="director" class="gt_row gt_left">Lasse Hallström</td>
+<td headers="cast" class="gt_row gt_left">Juliette Binoche,Johnny Depp,Judi Dench,Alfred Molina,Carrie-Anne Moss</td></tr>
+    <tr><td headers="title" class="gt_row gt_left">The Ring</td>
+<td headers="year" class="gt_row gt_right">2002</td>
+<td headers="minutes" class="gt_row gt_right">115</td>
+<td headers="genres" class="gt_row gt_left">Horror,Mystery</td>
+<td headers="rating" class="gt_row gt_right">7.1</td>
+<td headers="votes" class="gt_row gt_right">388229</td>
+<td headers="director" class="gt_row gt_left">Gore Verbinski</td>
+<td headers="cast" class="gt_row gt_left">Naomi Watts,Martin Henderson,Brian Cox,David Dorfman,Jane Alexander</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
 
 
 
