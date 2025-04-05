@@ -30,7 +30,15 @@ xs
 
 ```{r}
 me <- median(xs)
+
 ```
 
 Median is `r me`.
+
+```{r}
+modern[xs,] |>
+  gt::gt()
+
+renv::snapshot()
+```
 
